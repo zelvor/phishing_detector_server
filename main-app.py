@@ -27,4 +27,4 @@ def getprediction():
         
 
 if __name__ == '__main__':
-    app.run(port=1234, debug=True)
+    app.run()
