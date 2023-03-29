@@ -4,6 +4,7 @@ import joblib
 import pandas as pd
 import traceback
 from flask_cors import CORS, cross_origin
+import sklearn
 
 
 app = Flask(__name__)
