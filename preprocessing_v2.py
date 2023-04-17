@@ -427,7 +427,7 @@ def extract(url):
         future20 = executor.submit(abnormal_url, url)
         future21 = executor.submit(domain_age, url)
         future22 = executor.submit(check_dns_record, url)
-        future23 = executor.submit(page_rank, url)
+        future23 = executor.submit(page_rank, key, url)
         future24 = executor.submit(google_index, url)
         future25 = executor.submit(check_www, url)
         future26 = executor.submit(phish_hints, url)
