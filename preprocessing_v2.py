@@ -17,6 +17,10 @@ from pathlib import Path
 import favicon
 import multiprocessing as mp
 
+key = 'cook8wokwwk888kw04c8kc8ks4g4s8s0kskcwow4'
+HINTS = ['wp', 'login', 'includes', 'admin', 'content', 'site', 'images', 'js', 'alibaba', 'css', 'myaccount', 'dropbox', 'themes', 'plugins', 'signin', 'view']
+
+
 def path_level(url):
     return len(Path(url).parents)
 
@@ -355,6 +359,47 @@ def check_dns_record(hostname):
             return False
     except:
         return False
+    
+def page_rank(key, url):
+    domain = urlparse(url).netloc
+    urlApi = 'https://openpagerank.com/api/v1.0/getPageRank?domains%5B0%5D=' + domain
+    try:
+        request = requests.get(urlApi, headers={'API-OPR':key})
+        result = request.json()
+        result = result['response'][0]['page_rank_integer']
+        if result:
+            return result
+        else:
+            return 0
+    except:
+        return -1
+
+
+def google_index(url):
+    google = "https://www.google.com/search?q=site:" + url + "&hl=en"
+    response = requests.get(google, cookies={"CONSENT": "YES+1"})
+    soup = BeautifulSoup(response.content, "html.parser")
+    not_indexed = re.compile("did not match any documents")
+
+    if soup(text=not_indexed):
+        return False
+    return True
+
+def check_www(url):
+    words_raw = re.findall(r"\b[\w']+\b", url)
+    count = 0
+    for word in words_raw:
+        if not word.find('www') == -1:
+            count += 1
+    return count
+
+    
+def phish_hints(url):
+    url_path = urlparse(url).path
+    count = 0
+    for hint in HINTS:
+        count += url_path.lower().count(hint)
+    return count
 
 def extract(url):
     # return [path_level(url), url_length(url), num_dash(url), url_numeric(url), actual_word_rate(url), hostname_len(url), url_path_length(url), embedded_brand_name(url), pct_ext_hyperlinks(url), external_resources(url), ext_favicon(url), insecure_form(url), submit_info_to_email(url), frame_or_iframe(url), url_prefix_suffix(url), request_url(url), url_of_anchor(url), links_in_tags(url), sfh(url), abnormal_url(url), domain_age(url), check_dns_record(url)]
@@ -382,33 +427,39 @@ def extract(url):
         future20 = executor.submit(abnormal_url, url)
         future21 = executor.submit(domain_age, url)
         future22 = executor.submit(check_dns_record, url)
-        return normalize([future1.result(), future2.result(), future3.result(), future4.result(), future5.result(), future6.result(), future7.result(), future8.result(), future9.result(), future10.result(), future11.result(), future12.result(), future13.result(), future14.result(), future15.result(), future16.result(), future17.result(), future18.result(), future19.result(), future20.result(), future21.result(), future22.result()])
+        future23 = executor.submit(page_rank, url)
+        future24 = executor.submit(google_index, url)
+        future25 = executor.submit(check_www, url)
+        future26 = executor.submit(phish_hints, url)
 
-def normalize(list_feature):
-    list_feature[0] = 1 if list_feature[0] <= 2 or list_feature[0] > 10 else 0
-    list_feature[1] = 1 if list_feature[1] >= 35 and list_feature[1] <= 40 else 0
-    list_feature[2] = 1 if list_feature[2] == 1 else 0
-    list_feature[3] = -1 if list_feature[3] >= 1 and list_feature[3] <= 20 else 1 if list_feature[3] > 20 else 0
-    list_feature[4] = 1 if list_feature[4] < 0.8 else 0 if list_feature[4] > 0.9 else -1
-    list_feature[5] = 1 if list_feature[5] > 25 else 0
-    list_feature[6] = 1 if list_feature[6] <= 10 else 0
-    list_feature[7] = 1 if list_feature[7] < 1 else 0
-    list_feature[8] = 1 if list_feature[8] > 0.5 else 0
-    list_feature[9] = 1 if list_feature[9] > 0.5 else 0
-    list_feature[10] = 1 if list_feature[10] == True else 0
-    list_feature[11] = 1 if list_feature[11] == True else 0
-    list_feature[12] = 1 if list_feature[12] == True else 0
-    list_feature[13] = 1 if list_feature[13] == True else 0
-    list_feature[14] = 1 if list_feature[14] == True else 0
-    list_feature[15] = 1 if list_feature[15] > 0.5 else 0
-    list_feature[16] = 1 if list_feature[16] > 0.9 else 0
-    list_feature[17] = 1 if list_feature[17] > 0.9 else 0
-    list_feature[18] = 1 if list_feature[18] > 0.5 else 0
-    list_feature[19] = 1 if list_feature[19] == True else 0
-    list_feature[20] = 1 if list_feature[20] < 500 else -1 if list_feature[20] < 4000 else 0
-    list_feature[21] = 1 if list_feature[21] == False else 0
 
-    return list_feature
+        return [future1.result(), future2.result(), future3.result(), future4.result(), future5.result(), future6.result(), future7.result(), future8.result(), future9.result(), future10.result(), future11.result(), future12.result(), future13.result(), future14.result(), future15.result(), future16.result(), future17.result(), future18.result(), future19.result(), future20.result(), future21.result(), future22.result(), future23.result(), future24.result(), future25.result(), future26.result()]
+
+# def normalize(list_feature):
+#     list_feature[0] = 1 if list_feature[0] <= 2 or list_feature[0] > 10 else 0
+#     list_feature[1] = 1 if list_feature[1] >= 35 and list_feature[1] <= 40 else 0
+#     list_feature[2] = 1 if list_feature[2] == 1 else 0
+#     list_feature[3] = -1 if list_feature[3] >= 1 and list_feature[3] <= 20 else 1 if list_feature[3] > 20 else 0
+#     list_feature[4] = 1 if list_feature[4] < 0.8 else 0 if list_feature[4] > 0.9 else -1
+#     list_feature[5] = 1 if list_feature[5] > 25 else 0
+#     list_feature[6] = 1 if list_feature[6] <= 10 else 0
+#     list_feature[7] = 1 if list_feature[7] < 1 else 0
+#     list_feature[8] = 1 if list_feature[8] > 0.5 else 0
+#     list_feature[9] = 1 if list_feature[9] > 0.5 else 0
+#     list_feature[10] = 1 if list_feature[10] == True else 0
+#     list_feature[11] = 1 if list_feature[11] == True else 0
+#     list_feature[12] = 1 if list_feature[12] == True else 0
+#     list_feature[13] = 1 if list_feature[13] == True else 0
+#     list_feature[14] = 1 if list_feature[14] == True else 0
+#     list_feature[15] = 1 if list_feature[15] > 0.5 else 0
+#     list_feature[16] = 1 if list_feature[16] > 0.9 else 0
+#     list_feature[17] = 1 if list_feature[17] > 0.9 else 0
+#     list_feature[18] = 1 if list_feature[18] > 0.5 else 0
+#     list_feature[19] = 1 if list_feature[19] == True else 0
+#     list_feature[20] = 1 if list_feature[20] < 500 else -1 if list_feature[20] < 4000 else 0
+#     list_feature[21] = 1 if list_feature[21] == False else 0
+
+#     return list_feature
 
 def detect_phishing(url):
     list_feature = extract(url)
