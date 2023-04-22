@@ -12,7 +12,6 @@ from preprocessing_v2 import detect_phishing
 
 
 app = Flask(__name__)
-# model = joblib.load('SVM_model.pkl')
 try:
     model = joblib.load('RFC_model.pkl')
     print('Model loaded')
