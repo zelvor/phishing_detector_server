@@ -13,3 +13,4 @@ whois==0.9.27
 tld==0.12.6
 glibc==0.6.1
 cmake==3.26.3
+lightgbm==3.3.5
