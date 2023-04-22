@@ -8,13 +8,14 @@ from flask_cors import CORS, cross_origin
 import sklearn
 # from preprocessing import detect
 from preprocessing_v2 import detect_phishing
-
+from lightgbm import LGBMClassifier
 
 
 app = Flask(__name__)
 # model = joblib.load('SVM_model.pkl')
 try:
-    model = joblib.load('RFC_model.pkl')
+    # model = joblib.load('RFC_model.pkl')
+    model = joblib.load('LightGBM_model.pkl')
     print('Model loaded')
 except Exception as e:
     print('Model loading error')
@@ -24,8 +25,6 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/getprediction', methods=['GET', 'POST'])
-
-
 @cross_origin()
 def getprediction():
     if model:
