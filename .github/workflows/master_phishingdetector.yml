@@ -24,6 +24,7 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
+          sudo apt-get install libgomp1
           python -m venv venv
           source venv/bin/activate
       
