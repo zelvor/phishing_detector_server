@@ -8,7 +8,7 @@ from flask_cors import CORS, cross_origin
 import sklearn
 # from preprocessing import detect
 from preprocessing_v2 import detect_phishing
-from lightgbm import LGBMClassifier
+# from lightgbm import LGBMClassifier
 
 
 app = Flask(__name__)
