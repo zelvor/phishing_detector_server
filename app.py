@@ -42,4 +42,4 @@ def getprediction():
             return jsonify({'trace': traceback.format_exc()})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, threaded=True)
