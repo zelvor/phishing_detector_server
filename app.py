@@ -6,7 +6,7 @@ import pandas as pd
 import traceback
 from flask_cors import CORS, cross_origin
 import sklearn
-from urllib.parse import urlparse
+from tld import get_tld
 # from preprocessing import detect
 from preprocessing_v2 import detect_phishing
 
@@ -40,7 +40,7 @@ def getprediction():
         try:
             # get url from request query params
             url = request.args.get('url')
-            domain = urlparse(url).netloc
+            domain = get_tld(url, as_object=True).fld
             #check domain is in whitelist
             if domain in whitelist:
                 return jsonify({'prediction': '[0]'})
