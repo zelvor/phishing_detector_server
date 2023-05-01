@@ -21,18 +21,15 @@ cors = CORS(app)
 
 with open('whitelist.txt') as f:
     whitelist = f.read().splitlines()
-
-print(whitelist)
+# print(whitelist)
 
 with open('blacklist.txt') as f:
     blacklist = f.read().splitlines()
-
-print(blacklist)
-
+# print(blacklist)
 
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-@app.route('/getprediction', methods=['GET', 'POST'])
+@app.route('/getprediction', methods=['GET'])
 @cross_origin()
 def getprediction():
     if model:
@@ -54,6 +51,17 @@ def getprediction():
                 return jsonify({'prediction': str(prediction)})
         except:
             return jsonify({'trace': traceback.format_exc()})
+
+
+@app.route('/postreporturl', methods=['POST'])
+@cross_origin()
+def postreporturl():
+    url = request.args.get('url')
+    print(url)
+    # write url to report_url.txt
+    with open('report_url.txt', 'a') as f:
+        f.write(url + '\n')
+    return jsonify({'message': 'success'})
 
 if __name__ == "__main__":
     app.run(threaded=True)
