@@ -1,5 +1,5 @@
-azure_storage_blob==12.16.0
 beautifulsoup4==4.12.2
+azure_storage_blob==12.16.0
 dnspython==2.3.0
 favicon==0.7.0
 Flask==2.2.2
