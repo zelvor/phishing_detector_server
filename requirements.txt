@@ -1,4 +1,4 @@
-azure-storage==0.37.0
+azure_storage==0.37.0
 beautifulsoup4==4.12.2
 dnspython==2.3.0
 favicon==0.7.0

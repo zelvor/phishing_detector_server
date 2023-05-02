@@ -10,7 +10,6 @@ from tld import get_tld
 # from preprocessing import detect
 from preprocessing_v2 import detect_phishing
 from azure.storage.blob import BlobServiceClient, ContentSettings, BlobType
-from azure.core.exceptions import AzureError
 
 # Azure Blob Storage credentials
 connect_str = 'DefaultEndpointsProtocol=https;AccountName=phishingdetectorstorage;AccountKey=6tIBbQBjw0fFxkrkJVfiFGbOwIBY5iL3kq0oaH2kQTCHyEJPa4OWuj3gy1vL/3VKLaRlJnPMiLo++ASt6gr8hg==;EndpointSuffix=core.windows.net'
