@@ -36,7 +36,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @cross_origin()
 def getprediction():
     if model:
-        # detect_phishing(url)
         try:
             # get url from request query params
             url = request.args.get('url')
