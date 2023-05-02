@@ -7,7 +7,6 @@ import traceback
 from flask_cors import CORS, cross_origin
 import sklearn
 from tld import get_tld
-# from preprocessing import detect
 from preprocessing_v2 import detect_phishing
 from azure.storage.blob import BlobServiceClient, ContentSettings, BlobType
 
