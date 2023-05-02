@@ -1,2 +1,10 @@
 google.com
+youTube.com
 facebook.com
+twitter.com
+instagram.com
+baidu.com 
+wikipedia.org 
+yandex.ru 
+yahoo.com 
+whatsapp.com
