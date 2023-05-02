@@ -37,7 +37,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def getprediction():
     if model:
         try:
-            # get url from request query params
             url = request.args.get('url')
             domain = get_tld(url, as_object=True).fld
             # check domain is in whitelist
