@@ -39,6 +39,7 @@ def getprediction():
         try:
             url = request.args.get('url')
             domain = get_tld(url, as_object=True).fld
+            print(domain)
             # check domain is in whitelist
             if domain in whitelist:
                 return jsonify({'prediction': '[0]'})
