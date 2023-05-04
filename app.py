@@ -40,7 +40,6 @@ def getprediction():
             url = request.args.get('url')
             url = url.lower()
             domain = get_tld(url, as_object=True).fld
-            print(domain)
             # check domain is in whitelist
             if domain in whitelist:
                 return jsonify({'prediction': '[0]'})
@@ -66,8 +65,8 @@ def postreporturl():
             blob_client.upload_blob(url + '\n', blob_type=BlobType.AppendBlob, overwrite=False,
                                     content_settings=ContentSettings(content_type='text/plain'))
         return jsonify({'message': 'success'})
-    except AzureError as e:
-        return jsonify({'message': 'failed'})
+    except Exception as e:
+        return jsonify({'message': str(e)}) 
 
 
 if __name__ == "__main__":
