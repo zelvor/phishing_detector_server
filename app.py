@@ -40,7 +40,6 @@ def getprediction():
             url = request.args.get('url')
             url = url.lower()
             domain = get_tld(url, as_object=True).fld
-            # check domain is in whitelist
             if domain in whitelist:
                 return jsonify({'prediction': '[0]'})
             elif domain in blacklist:
@@ -57,7 +56,6 @@ def getprediction():
 @cross_origin()
 def postreporturl():
     url = request.args.get('url')
-    # send url to report_url.txt on Azure Blob Storage
     try:
         report_url_content = blob_client.download_blob().readall().decode('utf-8')
         report_url_list = report_url_content.splitlines()
