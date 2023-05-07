@@ -32,6 +32,16 @@ with open('blacklist.txt') as f:
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
+@app.route('/extractfeatures', methods=['GET'])
+@cross_origin()
+def extractfeatures():
+    url = request.args.get('url')
+    try:
+        features = detect_phishing(url)
+        return jsonify({'features': str(features)})
+    except:
+        return jsonify({'trace': traceback.format_exc()})
+
 @app.route('/getprediction', methods=['GET'])
 @cross_origin()
 def getprediction():
