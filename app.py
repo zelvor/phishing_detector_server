@@ -78,4 +78,7 @@ def postreporturl():
 
 
 if __name__ == "__main__":
+    url = "https://portal.azure.com/"
+    domain = get_tld(url, as_object=True).fld
+    print(domain)
     app.run(threaded=True)
