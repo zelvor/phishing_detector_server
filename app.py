@@ -18,15 +18,15 @@ blob_client = container_client.get_blob_client('report_url.txt')
 
 app = Flask(__name__)
 try:
-    model = joblib.load('RFC_model.pkl')
+    model = joblib.load('models/RFC_model.pkl')
 except Exception as e:
     print(str(e))
 cors = CORS(app)
 
-with open('whitelist.txt') as f:
+with open('list/whitelist.txt') as f:
     whitelist = f.read().splitlines()
 
-with open('blacklist.txt') as f:
+with open('list/blacklist.txt') as f:
     blacklist = f.read().splitlines()
 
 app.config['CORS_HEADERS'] = 'Content-Type'
