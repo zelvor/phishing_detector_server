@@ -1,4 +1,5 @@
 hcmut.edu.vn
+scm.azurewebsites.net
 raisoni.net
 osdev.org
 hellamarine.com
@@ -11,6 +12,7 @@ sapo.pt
 americantower.com.de
 rsmus.com
 techspot.com
+windows.net
 writingexcuses.com
 coca-colacompany.com
 rosiesplace.org
