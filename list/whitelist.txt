@@ -12,6 +12,7 @@ sapo.pt
 americantower.com.de
 rsmus.com
 techspot.com
+animehay.fan
 windows.net
 azure.com
 openai.com
