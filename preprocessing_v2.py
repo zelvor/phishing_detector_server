@@ -435,32 +435,6 @@ def extract(url):
 
         return [future1.result(), future2.result(), future3.result(), future4.result(), future5.result(), future6.result(), future7.result(), future8.result(), future9.result(), future10.result(), future11.result(), future12.result(), future13.result(), future14.result(), future15.result(), future16.result(), future17.result(), future18.result(), future19.result(), future20.result(), future21.result(), future22.result(), future23.result(), future24.result(), future25.result(), future26.result()]
 
-# def normalize(list_feature):
-#     list_feature[0] = 1 if list_feature[0] <= 2 or list_feature[0] > 10 else 0
-#     list_feature[1] = 1 if list_feature[1] >= 35 and list_feature[1] <= 40 else 0
-#     list_feature[2] = 1 if list_feature[2] == 1 else 0
-#     list_feature[3] = -1 if list_feature[3] >= 1 and list_feature[3] <= 20 else 1 if list_feature[3] > 20 else 0
-#     list_feature[4] = 1 if list_feature[4] < 0.8 else 0 if list_feature[4] > 0.9 else -1
-#     list_feature[5] = 1 if list_feature[5] > 25 else 0
-#     list_feature[6] = 1 if list_feature[6] <= 10 else 0
-#     list_feature[7] = 1 if list_feature[7] < 1 else 0
-#     list_feature[8] = 1 if list_feature[8] > 0.5 else 0
-#     list_feature[9] = 1 if list_feature[9] > 0.5 else 0
-#     list_feature[10] = 1 if list_feature[10] == True else 0
-#     list_feature[11] = 1 if list_feature[11] == True else 0
-#     list_feature[12] = 1 if list_feature[12] == True else 0
-#     list_feature[13] = 1 if list_feature[13] == True else 0
-#     list_feature[14] = 1 if list_feature[14] == True else 0
-#     list_feature[15] = 1 if list_feature[15] > 0.5 else 0
-#     list_feature[16] = 1 if list_feature[16] > 0.9 else 0
-#     list_feature[17] = 1 if list_feature[17] > 0.9 else 0
-#     list_feature[18] = 1 if list_feature[18] > 0.5 else 0
-#     list_feature[19] = 1 if list_feature[19] == True else 0
-#     list_feature[20] = 1 if list_feature[20] < 500 else -1 if list_feature[20] < 4000 else 0
-#     list_feature[21] = 1 if list_feature[21] == False else 0
-
-#     return list_feature
-
 def detect_phishing(url):
     list_feature = extract(url)
     return list_feature
