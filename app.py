@@ -18,7 +18,7 @@ blob_client = container_client.get_blob_client('report_url.txt')
 
 app = Flask(__name__)
 try:
-    model = joblib.load('models/RFC_model.pkl')
+    model = joblib.load('models/ML_model.pkl')
 except Exception as e:
     print(str(e))
 cors = CORS(app)
