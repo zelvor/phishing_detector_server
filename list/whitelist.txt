@@ -1,4 +1,6 @@
 hcmut.edu.vn
+hoyolab.com
+act.hoyoverse.com
 scm.azurewebsites.net
 raisoni.net
 osdev.org
